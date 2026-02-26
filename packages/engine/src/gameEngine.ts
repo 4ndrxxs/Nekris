@@ -1,7 +1,7 @@
 import {
   CellType, Point, EngineState, LevelData, MoveResult, GameEffect, MoveOptions,
-} from './types.js';
-import { GAME_CONSTANTS } from './constants.js';
+} from './types';
+import { GAME_CONSTANTS } from './constants';
 
 export function createInitialState(level: LevelData): EngineState {
   return {

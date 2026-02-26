@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { replayMoves } from '../src/validation.js';
-import { generateLevel } from '../src/levelGenerator.js';
-import { createPRNG } from '../src/prng.js';
-import { processMove, createInitialState } from '../src/gameEngine.js';
+import { replayMoves } from '../src/validation';
+import { generateLevel } from '../src/levelGenerator';
+import { createPRNG } from '../src/prng';
+import { processMove, createInitialState } from '../src/gameEngine';
 
 describe('replayMoves', () => {
   it('replays valid moves and returns correct final score', () => {

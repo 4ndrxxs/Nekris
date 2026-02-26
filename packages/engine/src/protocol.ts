@@ -1,4 +1,4 @@
-import { Point } from './types.js';
+import { Point } from './types';
 
 // Client -> Server
 export type ClientMsg =

@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #1a1a2e;
+  --accent: #00ff88;
+  --text: #e0e0e0;
+  --muted: #666666;
+  --danger: #ff4444;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Neon Glow Pulse ─── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 4px var(--accent); }
+  50% { box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(0, 255, 136, 0.2); }
+}
+
+/* ─── Path Cell Neon Breathe ─── */
+@keyframes neon-breathe {
+  0%, 100% { box-shadow: inset 0 0 6px rgba(0, 255, 136, 0.3), 0 0 8px rgba(0, 255, 136, 0.2); }
+  50% { box-shadow: inset 0 0 10px rgba(0, 255, 136, 0.5), 0 0 16px rgba(0, 255, 136, 0.35); }
+}
+
+/* ─── Timer Shake (multi-axis for more drama) ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-3px) rotate(-0.5deg); }
+  30% { transform: translateX(3px) rotate(0.5deg); }
+  50% { transform: translateX(-2px); }
+  70% { transform: translateX(2px); }
+  90% { transform: translateX(-1px); }
+}
+
+/* ─── Collectible Float Bob ─── */
+@keyframes collectible-bob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.05); }
+}
+
+/* ─── Collectible Warning Flash ─── */
+@keyframes warning-flash {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.15; transform: scale(0.8); }
+}
+
+/* ─── Water Cell Animated Gradient ─── */
+@keyframes water-ripple {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Grid Container Glow ─── */
+@keyframes grid-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 136, 0.05), inset 0 0 15px rgba(0, 255, 136, 0.02); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.1), inset 0 0 25px rgba(0, 255, 136, 0.04); }
+}
+
+/* ─── Score Pop Spring ─── */
+@keyframes score-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Cell Entrance (for staggered grid appear) ─── */
+@keyframes cell-appear {
+  from { opacity: 0; transform: scale(0.3) rotate(8deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* ─── Logo Glitch Effect (TETRIO-style) ─── */
+@keyframes glitch-skew {
+  0%, 85%, 100% { transform: skew(0deg); }
+  86% { transform: skew(-3deg); }
+  90% { transform: skew(2deg); }
+  93% { transform: skew(-1deg); }
+  96% { transform: skew(1deg); }
+}
+
+/* ─── Float-up fade for bonus text ─── */
+@keyframes float-up-fade {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+}
+
+/* ─── Scanline overlay (subtle CRT feel) ─── */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* ─── Utility Animation Classes ─── */
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-neon-breathe { animation: neon-breathe 2s ease-in-out infinite; }
+.animate-shake { animation: shake 0.4s ease-in-out; }
+.animate-collectible-bob { animation: collectible-bob 1.5s ease-in-out infinite; }
+.animate-warning-flash { animation: warning-flash 0.35s ease-in-out infinite; }
+.animate-grid-glow { animation: grid-glow 3s ease-in-out infinite; }
+.animate-score-pop { animation: score-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-glitch { animation: glitch-skew 5s ease-in-out infinite; }
+.animate-float-up { animation: float-up-fade 1.8s ease-out forwards; }
+
+.animate-water-ripple {
+  background: linear-gradient(135deg, #0a1628, #162040, #0a1628);
+  background-size: 200% 200%;
+  animation: water-ripple 4s ease infinite;
+}
+
+/* ─── Neon text glow utility ─── */
+.neon-text {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 30px rgba(0, 255, 136, 0.2);
+}
+.neon-text-strong {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.7), 0 0 40px rgba(0, 255, 136, 0.3), 0 0 80px rgba(0, 255, 136, 0.15);
+}
+.neon-text-danger {
+  text-shadow: 0 0 10px rgba(255, 68, 68, 0.7), 0 0 30px rgba(255, 68, 68, 0.3);
+}

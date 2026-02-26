@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { generateLevel } from '../src/levelGenerator.js';
-import { createPRNG } from '../src/prng.js';
-import { CellType } from '../src/types.js';
+import { generateLevel } from '../src/levelGenerator';
+import { createPRNG } from '../src/prng';
+import { CellType } from '../src/types';
 
 describe('generateLevel', () => {
   it('returns a valid LevelData for level 1', () => {

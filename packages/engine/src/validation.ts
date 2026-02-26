@@ -1,7 +1,7 @@
-import { TimedMove } from './types.js';
-import { createPRNG } from './prng.js';
-import { generateLevel } from './levelGenerator.js';
-import { processMove, createInitialState } from './gameEngine.js';
+import { TimedMove } from './types';
+import { createPRNG } from './prng';
+import { generateLevel } from './levelGenerator';
+import { processMove, createInitialState } from './gameEngine';
 
 export function replayMoves(
   seed: number,

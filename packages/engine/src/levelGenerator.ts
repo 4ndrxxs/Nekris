@@ -1,5 +1,5 @@
-import { CellType, Point, LevelData } from './types.js';
-import { GAME_CONSTANTS } from './constants.js';
+import { CellType, Point, LevelData } from './types';
+import { GAME_CONSTANTS } from './constants';
 
 export function generateLevel(levelIndex: number, rng: () => number): LevelData {
   const baseSize = GAME_CONSTANTS.BASE_GRID_SIZE;

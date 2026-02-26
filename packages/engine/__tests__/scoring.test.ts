@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateElo, getTier, Tier } from '../src/scoring.js';
+import { calculateElo, getTier, Tier } from '../src/scoring';
 
 describe('calculateElo', () => {
   it('winner gains, loser loses equal amount', () => {

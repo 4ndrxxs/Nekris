@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createPRNG } from '../src/prng.js';
+import { createPRNG } from '../src/prng';
 
 describe('createPRNG', () => {
   it('returns a function', () => {

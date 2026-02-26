@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { mirrorLevel } from '../src/mirrorMap.js';
-import { generateLevel } from '../src/levelGenerator.js';
-import { createPRNG } from '../src/prng.js';
+import { mirrorLevel } from '../src/mirrorMap';
+import { generateLevel } from '../src/levelGenerator';
+import { createPRNG } from '../src/prng';
 
 describe('mirrorLevel', () => {
   it('reverses each row of the grid', () => {

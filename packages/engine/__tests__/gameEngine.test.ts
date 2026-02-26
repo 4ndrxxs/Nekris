@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { processMove, createInitialState } from '../src/gameEngine.js';
-import { CellType, Point, EngineState, LevelData } from '../src/types.js';
+import { processMove, createInitialState } from '../src/gameEngine';
+import { CellType, Point, EngineState, LevelData } from '../src/types';
 
 function makeTestLevel(): LevelData {
   const grid: CellType[][] = [

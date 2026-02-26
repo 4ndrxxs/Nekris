@@ -1,4 +1,4 @@
-import { LevelData, Point } from './types.js';
+import { LevelData, Point } from './types';
 
 export function mirrorLevel(level: LevelData): LevelData {
   const { grid, startPoint, endPoint, path, gridSize, width, height, targetCount } = level;
