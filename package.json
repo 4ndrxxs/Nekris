@@ -1,0 +1,12 @@
+{
+  "name": "nekris",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @nekris/web dev",
+    "build": "pnpm --filter @nekris/engine build && pnpm --filter @nekris/web build",
+    "test": "pnpm --filter @nekris/engine test",
+    "test:watch": "pnpm --filter @nekris/engine test -- --watch",
+    "lint": "eslint .",
+    "clean": "rm -rf packages/*/dist apps/*/dist apps/*/.next"
+  }
+}
