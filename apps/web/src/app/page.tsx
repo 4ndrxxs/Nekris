@@ -3,11 +3,17 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import BackgroundParticles from '@/components/effects/BackgroundParticles';
+import UserMenu from '@/components/auth/UserMenu';
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-8 p-4 relative overflow-hidden">
       <BackgroundParticles />
+
+      {/* Auth */}
+      <div className="absolute top-4 right-4 z-20">
+        <UserMenu />
+      </div>
 
       {/* Logo */}
       <motion.div
@@ -66,17 +72,45 @@ export default function Home() {
           </motion.div>
         </Link>
 
-        <motion.button
-          disabled
-          className="flex items-center justify-center px-6 py-4 rounded-xl font-bold text-lg opacity-40 cursor-not-allowed"
-          style={{
-            background: 'rgba(26, 26, 46, 0.5)',
-            color: '#666',
-            border: '1px solid rgba(102, 102, 102, 0.1)',
-          }}
-        >
-          Quick Race — Coming Soon
-        </motion.button>
+        <Link href="/leaderboard">
+          <motion.div
+            className="flex items-center justify-center px-6 py-4 rounded-xl font-bold text-lg cursor-pointer"
+            style={{
+              background: 'rgba(26, 26, 46, 0.6)',
+              color: '#e0e0e0',
+              border: '1px solid rgba(255,255,255,0.05)',
+            }}
+            whileHover={{ scale: 1.04, borderColor: 'rgba(0, 255, 136, 0.15)' }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Leaderboard
+          </motion.div>
+        </Link>
+
+        <Link href="/play/race">
+          <motion.div
+            className="flex items-center justify-center px-6 py-4 rounded-xl font-bold text-lg cursor-pointer relative overflow-hidden"
+            style={{
+              background: 'rgba(26, 26, 46, 0.7)',
+              color: '#00ddff',
+              border: '1px solid rgba(0, 221, 255, 0.12)',
+            }}
+            whileHover={{
+              scale: 1.04,
+              boxShadow: '0 0 30px rgba(0, 221, 255, 0.12), inset 0 0 30px rgba(0, 221, 255, 0.04)',
+            }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          >
+            <span className="relative z-10">Quick Race</span>
+            <motion.div
+              className="absolute inset-0 opacity-0"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(0,221,255,0.04), transparent)' }}
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear', delay: 1.5 }}
+            />
+          </motion.div>
+        </Link>
       </motion.div>
 
       <motion.p
