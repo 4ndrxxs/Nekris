@@ -8,6 +8,27 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'NEKRIS — Competitive Puzzle',
   description: 'Daily challenges and 1v1 competitive path-building puzzles',
+  manifest: '/manifest.json',
+  icons: [
+    { rel: 'icon', url: '/icon.svg', type: 'image/svg+xml' },
+  ],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'NEKRIS',
+  },
+  openGraph: {
+    title: 'NEKRIS — Competitive Puzzle',
+    description: 'Daily challenges and 1v1 competitive path-building puzzles',
+    siteName: 'NEKRIS',
+    type: 'website',
+    url: 'https://nekris.online',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'NEKRIS',
+    description: 'Competitive path-building puzzle game',
+  },
 };
 
 export const viewport: Viewport = {

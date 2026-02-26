@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import Grid from '@/components/game/Grid';
 import BackgroundParticles from '@/components/effects/BackgroundParticles';
 import CountdownOverlay from '@/components/effects/CountdownOverlay';
@@ -9,6 +10,7 @@ import VictoryEffects from '@/components/effects/VictoryEffects';
 import { useGameEngine } from '@/hooks/useGameEngine';
 import { useAudio } from '@/hooks/useAudio';
 import { useKeyboardControls } from '@/hooks/useKeyboardControls';
+import { useDailySubmit } from '@/hooks/useDailySubmit';
 import { GameEffect, Point } from '@nekris/engine';
 
 function getDailySeed(): number {
@@ -18,10 +20,13 @@ function getDailySeed(): number {
 
 export default function DailyPage() {
   const { playSound, toggleSound, soundEnabled } = useAudio();
+  const { submitScore, submitting, submitted } = useDailySubmit();
   const [bonuses, setBonuses] = useState<{ id: number; text: string }[]>([]);
   const [showCountdown, setShowCountdown] = useState(true);
   const [scoreKey, setScoreKey] = useState(0);
+  const [shared, setShared] = useState(false);
   const bonusId = useRef(0);
+  const dailySeed = getDailySeed();
 
   const handleEffects = useCallback((effects: GameEffect[]) => {
     for (const effect of effects) {
@@ -43,12 +48,25 @@ export default function DailyPage() {
 
   const {
     level, state, timeLeft, isTreatActive, isYarnActive,
-    isDragging, setIsDragging, gameResult, handleMove,
+    isDragging, setIsDragging, gameResult, handleMove, moves,
   } = useGameEngine({
-    seed: getDailySeed(),
+    seed: dailySeed,
     levelIndex: 1,
     onEffects: handleEffects,
   });
+
+  // Auto-submit score on game result
+  useEffect(() => {
+    if (gameResult && state && !submitted) {
+      submitScore({
+        seed: dailySeed,
+        score: state.score,
+        timeLeftMs: timeLeft * 1000,
+        moveCount: state.moveCount,
+        moves: moves,
+      });
+    }
+  }, [gameResult]);
 
   // Keyboard controls
   const handleKeyMove = useCallback((dir: { x: number; y: number }) => {
@@ -183,16 +201,61 @@ export default function DailyPage() {
               <span>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')} left</span>
             </motion.div>
 
-            {/* Share hint */}
-            <motion.p
-              className="text-xs mt-4"
-              style={{ color: '#444' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
+            {/* Actions */}
+            <motion.div
+              className="flex gap-3 mt-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
             >
-              Share coming soon...
-            </motion.p>
+              <button
+                onClick={() => {
+                  const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                  const emoji = gameResult === 'win' ? '🟢' : '🔴';
+                  const text = `${emoji} NEKRIS Daily ${date}\n${state.score.toLocaleString()} pts | ${state.moveCount} moves\nnekris.online`;
+                  if (navigator.share) {
+                    navigator.share({ text }).catch(() => {});
+                  } else {
+                    navigator.clipboard.writeText(text).then(() => setShared(true));
+                    setTimeout(() => setShared(false), 2000);
+                  }
+                }}
+                className="px-4 py-2 rounded-xl text-sm font-bold transition-all"
+                style={{
+                  background: 'rgba(0, 255, 136, 0.1)',
+                  color: '#00ff88',
+                  border: '1px solid rgba(0, 255, 136, 0.15)',
+                }}
+              >
+                {shared ? 'Copied!' : 'Share'}
+              </button>
+              <Link
+                href="/leaderboard"
+                className="px-4 py-2 rounded-xl text-sm font-bold"
+                style={{ color: '#888', border: '1px solid rgba(255,255,255,0.05)' }}
+              >
+                Leaderboard
+              </Link>
+              <Link
+                href="/"
+                className="px-4 py-2 rounded-xl text-sm font-bold"
+                style={{ color: '#666' }}
+              >
+                Menu
+              </Link>
+            </motion.div>
+
+            {/* Submit status */}
+            {submitting && (
+              <motion.p
+                className="text-xs mt-2"
+                style={{ color: '#555' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                Saving score...
+              </motion.p>
+            )}
           </motion.div>
         ) : (
           <motion.div
